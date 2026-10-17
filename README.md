@@ -29,13 +29,13 @@
             line-height: 1.6;
         }
 
-        /* Header / Nav */
+        /* Header / Nav with Dropdown */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(10, 10, 12, 0.9);
+            background: rgba(10, 10, 12, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             display: flex;
@@ -53,6 +53,7 @@
             font-size: 1.2rem;
             letter-spacing: 1px;
             color: var(--text-main);
+            text-decoration: none;
         }
 
         .logo-area span {
@@ -63,6 +64,11 @@
             display: flex;
             list-style: none;
             gap: 2rem;
+            align-items: center;
+        }
+
+        nav li {
+            position: relative;
         }
 
         nav a {
@@ -70,9 +76,51 @@
             color: var(--text-muted);
             font-weight: 600;
             transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        nav a:hover {
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        /* Dropdown Menu Styles */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            list-style: none;
+            padding: 0.5rem 0;
+            min-width: 180px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        nav li:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            width: 100%;
+        }
+
+        .dropdown-menu a {
+            padding: 0.6rem 1.2rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: rgba(255, 102, 0, 0.1);
             color: var(--primary-color);
         }
 
@@ -94,7 +142,7 @@
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .hero h1 span {
@@ -102,8 +150,18 @@
             text-shadow: 0 0 20px var(--primary-glow);
         }
 
+        .hero .slogan {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             max-width: 600px;
             margin-bottom: 2rem;
@@ -224,16 +282,23 @@
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header with Dropdown Navigation -->
     <header>
-        <div class="logo-area">
+        <a href="#" class="logo-area">
             BOUND RIFT <span>GAMING</span>
-        </div>
+        </a>
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
-                <li><a href="#roster">Roster</a></li>
-                <li><a href="#meta">Meta & Decks</a></li>
+                <!-- Dropdown Example -->
+                <li>
+                    <a href="#meta">TCG Hub ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#meta">Featured Decks</a></li>
+                        <li><a href="#meta">Meta Tier List</a></li>
+                        <li><a href="#meta">Strategy Guides</a></li>
+                    </ul>
+                </li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -242,41 +307,20 @@
     <!-- Hero Section -->
     <section class="hero">
         <h1>Bound Rift <span>Gaming</span></h1>
-        <p>An emerging competitive esports roster mastering the Riftbound League of Legends Trading Card Game.</p>
-        <a href="#roster" class="btn">View Our Roster</a>
+        <div class="slogan">Forged in discipline. Bound for glory.</div>
+        <p>Mastering the competitive Riftbound League of Legends Trading Card Game meta.</p>
+        <a href="#meta" class="btn">Explore Decks</a>
     </section>
 
     <!-- About Section -->
     <section id="about">
         <h2>About <span>Us</span></h2>
         <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--text-muted);">
-            <p>Bound Rift Gaming is a dedicated competitive esports team focused on mastering the Riftbound League of Legends TCG. We study card synergies, optimize competitive decklists, and prepare to take our skills to upcoming regional and online tournament circuits.</p>
+            <p>Bound Rift Gaming is a dedicated competitive organization focused entirely on mastering the Riftbound League of Legends TCG. We study deep card synergies, optimize high-tier competitive decklists, and prepare to conquer upcoming tournament circuits.</p>
         </div>
     </section>
 
-    <!-- Roster Section -->
-    <section id="roster">
-        <h2>Team <span>Roster</span></h2>
-        <div class="grid">
-            <div class="card">
-                <h3>ShadowBinder</h3>
-                <div class="role">Team Captain / Deck Architect</div>
-                <p>Specializes in aggressive tempo control and champion matchups.</p>
-            </div>
-            <div class="card">
-                <h3>NexusWeaver</h3>
-                <div class="role">TCG Strategy Analyst</div>
-                <p>Expert in tournament meta breakdown and probability drafting.</p>
-            </div>
-            <div class="card">
-                <h3>VoidShaper</h3>
-                <div class="role">Competitive Player</div>
-                <p>Climbing the ranked ladders and testing cutting-edge builds.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Meta Decks Section -->
+    <!-- Meta Decks Section (Replaces Roster) -->
     <section id="meta">
         <h2>Featured <span>Decks</span></h2>
         <div class="grid">
