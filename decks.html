@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiance Decks & Tier List | Bound Rift Gaming</title>
+    <style>
+        :root {
+            --primary-color: #ff6600;
+            --primary-glow: rgba(255, 102, 0, 0.4);
+            --bg-dark: #0a0a0c;
+            --bg-card: #141418;
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --border-color: #2a2a35;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Header / Nav */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 12, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo-area span {
+            color: var(--primary-color);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Page Content */
+        .container {
+            padding: 8rem 8% 4rem 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title h1 span {
+            color: var(--primary-color);
+            text-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .page-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Tier List Image Banner */
+        .tierlist-banner {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .tierlist-banner h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tierlist-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Tier Sections */
+        .tier-section {
+            margin-bottom: 3rem;
+        }
+
+        .tier-header {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px 6px 0 0;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 0;
+        }
+
+        .tier-splus { background: #3b82f6; color: white; }
+        .tier-s { background: #ec4899; color: white; }
+        .tier-a { background: #eab308; color: black; }
+        .tier-b { background: #a855f7; color: white; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 0 8px 8px 8px;
+            padding: 2rem;
+        }
+
+        .card {
+            background-color: #1c1c24;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--primary-color);
+            opacity: 0.7;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .card .legend-tag {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .deck-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.8rem;
+        }
+
+        .deck-stats span strong {
+            color: var(--text-main);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo-area">BOUND RIFT <span>GAMING</span></a>
+        <nav><a href="index.html">← Back to Home</a></nav>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="page-title">
+            <h1>Radiance <span>Tier List & Decks</span></h1>
+            <p>Official competitive tier list matching the Radiance (Set 5) meta rankings.</p>
+        </div>
+
+        <!-- Tier List Visual Chart Banner -->
+        <div class="tierlist-banner">
+            <h3>Official Tier List Chart</h3>
+            <img src="tierlist.jpg" alt="Radiance Set 5 Tier List Chart" class="tierlist-img">
+        </div>
+
+        <!-- S+ Tier -->
+        <div class="tier-section">
+            <div class="tier-header tier-splus">Tier S+</div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Shadow Fist Strike</h3>
+                    <div class="legend-tag">Legend: Akali</div>
+                    <p>Lightning-fast execution style utilizing reveal mechanics to trigger devastating hidden effects.</p>
+                    <div class="deck-stats"><span>Archetype: <strong>Fast Aggro</strong></span><span>Tier: <strong>S+</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Blade Dancer</h3>
+                    <div class="legend-tag">Legend: Irelia</div>
+                    <p>Continuous flurry attacks and multi-unit positioning mastery to overwhelm enemy defenses.</p>
+                    <div class="deck-stats"><span>Archetype: <strong>Tempo / Swarm</strong></span><span>Tier: <strong>S+</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Shadow Shuriken</h3>
+                    <div class="legend-tag">Legend: Kennen</div>
+                    <p>Lightning speed stuns and elusive poke damage that dismantles slow builds.</p>
+                    <div class="deck-stats"><span>Archetype: <span>Control Aggro</span></span><span>Tier: <strong>S+</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Primal Hunt</h3>
+                    <div class="legend-tag">Legend: Rengar</div>
+                    <p>Prowling stealth ambushes and trophy-stacking burst damage to pick off key targets.</p>
+                    <div class="deck-stats"><span>Archetype: <span>Assassination Burst</span></span><span>Tier: <strong>S+</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Exiled Blade</h3>
+                    <div class="legend-tag">Legend: Riven</div>
+                    <p>Dynamic sword combo scaling and massive mid-game burst potential.</p>
+                    <div class="deck-stats"><span>Archetype: <span>Combo Tempo</span></span><span>Tier: <strong>S+</strong></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S Tier -->
+        <div class="tier-section">
+            <div class="tier-header tier-s">Tier S</div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Deceiver's Mirror</h3>
+                    <div class="legend-tag">Legend: LeBlanc</div>
+                    <p>Illusion clones, tactical repositioning, and deceptive burst damage windows.</p>
+                    <div class="deck-stats"><span>Archetype: <span>Deceptive Combo</span></span><span>Tier: <strong>S</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Chronocharge</h3>
+                    <div class="legend-tag">Legend: Ezreal</div>
+                    <p>Spell-weaving burst damage and ranged sniping capabilities[span_5](start_span)[span_5](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Spell Burn</span></span><span>Tier: <strong>S</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Emperor's Command</h3>
+                    <div class="legend-tag">Legend: Azir</div>
+                    <p>Soldier mobilization and battlefield control mechanics[span_6](start_span)[span_6](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Token Board Control</span></span><span>Tier: <strong>S</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Gloomy Melancholy</h3>
+                    <div class="legend-tag">Legend: Vex</div>
+                    <p>Anti-mobility disruption and scaling shadow magic crowd control.</p>
+                    <div class="deck-stats"><span>Archetype: <span>Anti-Meta Control</span></span><span>Tier: <strong>S</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Void Predator</h3>
+                    <div class="legend-tag">Legend: Kha'Zix</div>
+                    <p>Isolation burst tactics and evolving mutation combat adaptations.</p>
+                    <div class="deck-stats"><span>Archetype: <span>Isolation Assassin</span></span><span>Tier: <strong>S</strong></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- A Tier -->
+        <div class="tier-section">
+            <div class="tier-header tier-a">Tier A</div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Grand Duelist</h3>
+                    <div class="legend-tag">Legend: Fiora</div>
+                    <p>Precision strike tracking and targeted duel win conditions[span_7](start_span)[span_7](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Duelist Combo</span></span><span>Tier: <strong>A</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Forge Master</h3>
+                    <div class="legend-tag">Legend: Ornn</div>
+                    <p>Upgraded equipment crafting and sturdy frontline resilience[span_8](start_span)[span_8](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Equipment Ramp</span></span><span>Tier: <strong>A</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Glorious Executioner</h3>
+                    <div class="legend-tag">Legend: Draven</div>
+                    <p>Spinning axe catch mechanics and high-risk high-reward damage[span_9](start_span)[span_9](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Aggro Burst</span></span><span>Tier: <strong>A</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Unforgiven Steel</h3>
+                    <div class="legend-tag">Legend: Yasuo</div>
+                    <p>Stun and knock-up synergy wind strikes[span_10](start_span)[span_10](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Synergy Control</span></span><span>Tier: <strong>A</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Wuju Style</h3>
+                    <div class="legend-tag">Legend: Master Yi</div>
+                    <p>True damage scaling and meditation sustain[span_11](start_span)[span_11](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Hyper Carry</span></span><span>Tier: <strong>A</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Terror of the Void</h3>
+                    <div class="legend-tag">Legend: Cho'Gath</div>
+                    <p>Feast mechanics that scale maximum health and board presence[span_12](start_span)[span_12](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Ramp Control</span></span><span>Tier: <strong>A</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Steam Golem</h3>
+                    <div class="legend-tag">Legend: Blitzcrank</div>
+                    <p>Rocket grab positioning disruption and heavy tanking[span_13](start_span)[span_13](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Disruption Tank</span></span><span>Tier: <strong>A</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Realm of Death</h3>
+                    <div class="legend-tag">Legend: Mordekaiser</div>
+                    <p>Reanimation and 1v1 shadow realm isolation[span_14](start_span)[span_14](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Control Reanimate</span></span><span>Tier: <strong>A</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Unjust Chains</h3>
+                    <div class="legend-tag">Legend: Sylas</div>
+                    <p>Spell-stealing versatility and rebel uprising builds[span_15](start_span)[span_15](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Anti-Meta Midrange</span></span><span>Tier: <strong>A</strong></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- B Tier -->
+        <div class="tier-section">
+            <div class="tier-header tier-b">Tier B</div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Chronoshift Tempo</h3>
+                    <div class="legend-tag">Legend: Ekko</div>
+                    <p>Temporal mechanics and calculated board resets[span_16](start_span)[span_16](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Tempo Utility</span></span><span>Tier: <strong>B</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Harmonic Crescendo</h3>
+                    <div class="legend-tag">Legend: Seraphine</div>
+                    <p>Support aura scaling and musical combo turns[span_17](start_span)[span_17](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Combo Support</span></span><span>Tier: <strong>B</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Agony's Embrace</h3>
+                    <div class="legend-tag">Legend: Evelynn</div>
+                    <p>Stealth unit pressure and calculated assassination[span_18](start_span)[span_18](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Stealth Disruption</span></span><span>Tier: <strong>B</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Demacian Vanguard</h3>
+                    <div class="legend-tag">Legend: Jarvan IV / Garen</div>
+                    <p>Armor stacking and decisive strike leadership[span_19](start_span)[span_19](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Frontline Vanguard</span></span><span>Tier: <strong>B</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Clockwork Awakening</h3>
+                    <div class="legend-tag">Legend: Orianna</div>
+                    <p>Ball positioning and equipment unit synergy[span_20](start_span)[span_20](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Setup Control</span></span><span>Tier: <strong>B</strong></span></div>
+                </div>
+                <div class="card">
+                    <h3>Shadow Isles & Expansion Roster</h3>
+                    <div class="legend-tag">Legend: Ahri, Shaco, Shen, Vi, Sett, Jhin, Tahm, Nidalee, Ashe, Nasus, Lux, Kayn, Lucian, Karma</div>
+                    <p>Alternative roster picks and niche counter-meta tech options[span_21](start_span)[span_21](end_span).</p>
+                    <div class="deck-stats"><span>Archetype: <span>Niche / Experimental</span></span><span>Tier: <strong>B</strong></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Bound Rift Gaming. All rights reserved. Riftbound TCG Radiance Expansion Hub.</p>
+    </footer>
+
+</body>
+</html>
