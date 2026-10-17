@@ -29,7 +29,7 @@
             line-height: 1.6;
         }
 
-        /* Header / Nav with Logo Image */
+        /* Header / Nav with Seamless Blended Logo */
         header {
             position: fixed;
             top: 0;
@@ -54,8 +54,18 @@
 
         .logo-img {
             height: 45px;
-            width: auto;
-            border-radius: 4px;
+            width: 45px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 102, 0, 0.3);
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.2);
+            object-fit: cover;
+            mix-blend-mode: screen;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
         }
 
         .logo-text {
@@ -252,10 +262,10 @@
 </head>
 <body>
 
-    <!-- Header with Bound Rift Logo -->
+    <!-- Header with Blended Logo -->
     <header>
         <a href="index.html" class="logo-area">
-            <img src="1792198551624.jpg" alt="Bound Rift Gaming Logo" class="logo-img">
+            <img src="1000011322.jpg" alt="Bound Rift Gaming Logo" class="logo-img">
             <div class="logo-text">BOUND RIFT <span>GAMING</span></div>
         </a>
         <nav>
