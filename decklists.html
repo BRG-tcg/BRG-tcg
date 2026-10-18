@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Decklists | Bound Rift Gaming</title>
+    <style>
+        :root {
+            --primary-color: #ff6600;
+            --primary-glow: rgba(255, 102, 0, 0.4);
+            --bg-dark: #0a0a0c;
+            --bg-card: #141418;
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --border-color: #2a2a35;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Header / Nav */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 12, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 102, 0, 0.3);
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.2);
+            object-fit: cover;
+            mix-blend-mode: screen;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        .logo-text span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Container Content */
+        .container {
+            padding: 8rem 8% 4rem 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title h1 span {
+            color: var(--primary-color);
+            text-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .page-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Deck Section Styles */
+        .deck-section {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: border-color 0.3s;
+        }
+
+        .deck-section:hover {
+            border-color: var(--primary-color);
+        }
+
+        .deck-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .deck-header h2 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .deck-header h2 span {
+            color: var(--primary-color);
+        }
+
+        .badge {
+            background: rgba(255, 102, 0, 0.15);
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 102, 0, 0.3);
+        }
+
+        .deck-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media(max-width: 900px) {
+            .deck-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .deck-img-container {
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .deck-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .deck-img:hover {
+            transform: scale(1.02);
+        }
+
+        .deck-info p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: rgba(255, 102, 0, 0.03);
+            border: 2px dashed rgba(255, 102, 0, 0.3);
+            border-radius: 8px;
+        }
+
+        .coming-soon h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .coming-soon p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo-area">
+            <img src="1792221680832.jpg" alt="Bound Rift Gaming Logo" class="logo-img">
+            <div class="logo-text">BOUND RIFT <span>GAMING</span></div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="decks.html">Tier List</a></li>
+                <li><a href="decklists.html" style="color: var(--primary-color);">Main Decks</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="page-title">
+            <h1>Main <span>Decklists</span></h1>
+            <p>Explore our premier competitive decklists for Radiance Set 5.</p>
+        </div>
+
+        <!-- 1. LeBlanc -->
+        <div class="deck-section" id="leblanc">
+            <div class="deck-header">
+                <h2>1. <span>LeBlanc</span> (Radiance Set 5)</h2>
+                <span class="badge">Tier S - Deceptive Combo</span>
+            </div>
+            <div class="deck-content">
+                <div class="deck-info">
+                    <p>Our primary competitive build for LeBlanc in Radiance Set 5. This decklist utilizes illusion clones, swift tactical repositioning, and explosive mid-game burst windows to overwhelm opponents before they can stabilize.</p>
+                    <p>Optimized for tournament play with sideboard adaptability against heavy control and fast aggro archetypes.</p>
+                </div>
+                <div class="deck-img-container">
+                    <img src="1000011353.webp" alt="Set 5 LeBlanc Decklist" class="deck-img">
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Rengar -->
+        <div class="deck-section" id="rengar">
+            <div class="deck-header">
+                <h2>2. <span>Rengar</span> (Knife Kitty / Radiance Set 5)</h2>
+                <span class="badge">Tier S+ - Assassination Burst</span>
+            </div>
+            <div class="deck-content">
+                <div class="deck-info">
+                    <p>Dubbed "Knife Kitty", this S+ tier Rengar build relies on prowling stealth ambushes, trophy-stacking combat triggers, and devastating single-target burst damage to pick off key enemy threats in the early-to-mid game.</p>
+                    <p>Packed with optimal rune configurations and sideboard tech for maximum tournament consistency.</p>
+                </div>
+                <div class="deck-img-container">
+                    <img src="1000011352.webp" alt="Knife Kitty Rengar S5 Decklist" class="deck-img">
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Ziggs -->
+        <div class="deck-section" id="ziggs">
+            <div class="deck-header">
+                <h2>3. <span>Ziggs</span> (Radiance Set 5)</h2>
+                <span class="badge">Coming Soon</span>
+            </div>
+            <div class="coming-soon">
+                <h3>Ziggs Decklist Under Construction</h3>
+                <p>Our explosive Hexplosive Chaos decklist for Ziggs is currently being optimized for the Radiance Set 5 competitive meta. Check back soon for the full card breakdown and sideboard guide!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Bound Rift Gaming. All rights reserved. Riftbound TCG competitive esports team.</p>
+    </footer>
+
+</body>
+</html>
