@@ -120,59 +120,82 @@
             font-size: 1.1rem;
         }
 
-        /* Deck Section Styles */
+        /* Deck Section Styles with Theme Blending */
         .deck-section {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 2.5rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: border-color 0.3s;
+            margin-bottom: 3.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            transition: border-color 0.3s, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deck-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0.8;
         }
 
         .deck-section:hover {
             border-color: var(--primary-color);
+            transform: translateY(-3px);
         }
 
         .deck-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
 
         .deck-header h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .deck-header h2 span {
             color: var(--primary-color);
         }
 
+        .legend-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
         .badge {
             background: rgba(255, 102, 0, 0.15);
             color: var(--primary-color);
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 20px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             text-transform: uppercase;
             border: 1px solid rgba(255, 102, 0, 0.3);
         }
 
         .deck-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2.5rem;
             align-items: center;
         }
 
-        @media(max-width: 900px) {
+        @media(max-width: 950px) {
             .deck-content {
                 grid-template-columns: 1fr;
             }
@@ -180,48 +203,29 @@
 
         .deck-img-container {
             width: 100%;
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
             border: 1px solid var(--border-color);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            background: #000;
         }
 
         .deck-img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
 
         .deck-img:hover {
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
 
         .deck-info p {
             color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .coming-soon {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: rgba(255, 102, 0, 0.03);
-            border: 2px dashed rgba(255, 102, 0, 0.3);
-            border-radius: 8px;
-        }
-
-        .coming-soon h3 {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        .coming-soon p {
-            color: var(--text-muted);
             font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
         }
 
         footer {
@@ -261,7 +265,10 @@
         <!-- 1. LeBlanc -->
         <div class="deck-section" id="leblanc">
             <div class="deck-header">
-                <h2>1. <span>LeBlanc</span> (Radiance Set 5)</h2>
+                <h2>
+                    <img src="elena-kononenko-ri...jpg" alt="LeBlanc" class="legend-avatar" onerror="this.style.display='none'">
+                    1. <span>LeBlanc</span> (Radiance Set 5)
+                </h2>
                 <span class="badge">Tier S - Deceptive Combo</span>
             </div>
             <div class="deck-content">
@@ -270,7 +277,7 @@
                     <p>Optimized for tournament play with sideboard adaptability against heavy control and fast aggro archetypes.</p>
                 </div>
                 <div class="deck-img-container">
-                    <img src="1000011353.webp" alt="Set 5 LeBlanc Decklist" class="deck-img">
+                    <img src="set-5-leblanc.webp" alt="Set 5 LeBlanc Decklist" class="deck-img">
                 </div>
             </div>
         </div>
@@ -278,7 +285,10 @@
         <!-- 2. Rengar -->
         <div class="deck-section" id="rengar">
             <div class="deck-header">
-                <h2>2. <span>Rengar</span> (Knife Kitty / Radiance Set 5)</h2>
+                <h2>
+                    <img src="IMG_708e78a2-36e...jpg" alt="Rengar" class="legend-avatar" onerror="this.style.display='none'">
+                    2. <span>Rengar</span> (Knife Kitty / Radiance Set 5)
+                </h2>
                 <span class="badge">Tier S+ - Assassination Burst</span>
             </div>
             <div class="deck-content">
@@ -287,7 +297,7 @@
                     <p>Packed with optimal rune configurations and sideboard tech for maximum tournament consistency.</p>
                 </div>
                 <div class="deck-img-container">
-                    <img src="1000011352.webp" alt="Knife Kitty Rengar S5 Decklist" class="deck-img">
+                    <img src="knife-kitty-s5.webp" alt="Knife Kitty Rengar S5 Decklist" class="deck-img">
                 </div>
             </div>
         </div>
@@ -295,12 +305,20 @@
         <!-- 3. Ziggs -->
         <div class="deck-section" id="ziggs">
             <div class="deck-header">
-                <h2>3. <span>Ziggs</span> (Radiance Set 5)</h2>
-                <span class="badge">Coming Soon</span>
+                <h2>
+                    <img src="Screenshot_20261...jpg" alt="Ziggs" class="legend-avatar" onerror="this.style.display='none'">
+                    3. <span>Ziggs</span> (Radiance Set 5)
+                </h2>
+                <span class="badge">Tier S - Hexplosive Chaos</span>
             </div>
-            <div class="coming-soon">
-                <h3>Ziggs Decklist Under Construction</h3>
-                <p>Our explosive Hexplosive Chaos decklist for Ziggs is currently being optimized for the Radiance Set 5 competitive meta. Check back soon for the full card breakdown and sideboard guide!</p>
+            <div class="deck-content">
+                <div class="deck-info">
+                    <p>Our explosive Hexplosive Chaos decklist for Ziggs in Radiance Set 5. Utilizes bomb token mechanics, trap setups, and heavy scaling spell impact to control the board and melt opposing life totals.</p>
+                    <p>Fine-tuned for optimal zone domination and relentless burn pressure.</p>
+                </div>
+                <div class="deck-img-container">
+                    <img src="Screenshot_20261...jpg" alt="Ziggs Decklist" class="deck-img">
+                </div>
             </div>
         </div>
 
