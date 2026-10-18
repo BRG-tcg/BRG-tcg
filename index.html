@@ -186,6 +186,13 @@
             margin-bottom: 2rem;
         }
 
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
         .btn {
             background-color: var(--primary-color);
             color: white;
@@ -204,6 +211,17 @@
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 0 25px var(--primary-color);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
 
         /* Sections */
@@ -262,7 +280,7 @@
 </head>
 <body>
 
-    <!-- Header with Blended Logo -->
+    <!-- Header with Seamless Blended Logo -->
     <header>
         <a href="index.html" class="logo-area">
             <img src="1792221680832.jpg" alt="Bound Rift Gaming Logo" class="logo-img">
@@ -271,6 +289,7 @@
         <nav>
             <ul>
                 <li><a href="index.html#about">About</a></li>
+                <li><a href="decklists.html">Main Decklists</a></li>
                 <li>
                     <a href="decks.html">TCG Hub ▾</a>
                     <ul class="dropdown-menu">
@@ -287,7 +306,10 @@
         <h1>Bound Rift <span>Gaming</span></h1>
         <div class="slogan">Forged in discipline. Bound for glory.</div>
         <p>Mastering the competitive Riftbound League of Legends Trading Card Game meta.</p>
-        <a href="decks.html" class="btn">Explore Radiance Decks & Tier List</a>
+        <div class="hero-btns">
+            <a href="decklists.html" class="btn">View Main Decklists</a>
+            <a href="decks.html" class="btn btn-outline">Explore Tier List</a>
+        </div>
     </section>
 
     <!-- About Section -->
