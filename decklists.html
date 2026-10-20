@@ -208,6 +208,27 @@
             border: 1px solid var(--border-color);
             box-shadow: 0 8px 25px rgba(0,0,0,0.5);
             background: #000;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .deck-img-container::after {
+            content: '🔍 Click to Zoom';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--primary-color);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            border: 1px solid var(--primary-color);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .deck-img-container:hover::after {
+            opacity: 1;
         }
 
         .deck-img {
@@ -221,11 +242,43 @@
             transform: scale(1.03);
         }
 
-        .deck-info p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
+        /* Lightbox Modal Overlay */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary-color);
         }
 
         footer {
@@ -259,7 +312,7 @@
     <div class="container">
         <div class="page-title">
             <h1>Main <span>Decklists</span></h1>
-            <p>Explore our premier competitive decklists for Radiance Set 5.</p>
+            <p>Explore our premier competitive decklists for Radiance Set 5. Click any decklist to zoom in.</p>
         </div>
 
         <!-- 1. LeBlanc -->
@@ -276,7 +329,7 @@
                     <p>Our primary competitive build for LeBlanc in Radiance Set 5. This decklist utilizes illusion clones, swift tactical repositioning, and explosive mid-game burst windows to overwhelm opponents before they can stabilize.</p>
                     <p>Optimized for tournament play with sideboard adaptability against heavy control and fast aggro archetypes.</p>
                 </div>
-                <div class="deck-img-container">
+                <div class="deck-img-container" onclick="openLightbox(this.querySelector('img'))">
                     <img src="set-5-leblanc.webp" alt="Set 5 LeBlanc Decklist" class="deck-img">
                 </div>
             </div>
@@ -296,7 +349,7 @@
                     <p>Dubbed "Knife Kitty", this S+ tier Rengar build relies on prowling stealth ambushes, trophy-stacking combat triggers, and devastating single-target burst damage to pick off key enemy threats in the early-to-mid game.</p>
                     <p>Packed with optimal rune configurations and sideboard tech for maximum tournament consistency.</p>
                 </div>
-                <div class="deck-img-container">
+                <div class="deck-img-container" onclick="openLightbox(this.querySelector('img'))">
                     <img src="knife-kitty-s5.webp" alt="Knife Kitty Rengar S5 Decklist" class="deck-img">
                 </div>
             </div>
@@ -316,13 +369,34 @@
                     <p>Our explosive "Twisted Ziggs" build for Radiance Set 5. Utilizing Hexplosives Expert mechanics, bomb tokens, and heavy zone control spells to dominate the board and out-value opponents.</p>
                     <p>Packed with optimal rune configurations, flexible sideboards, and heavy scaling spell impact.</p>
                 </div>
-                <div class="deck-img-container">
-                    <img src="twisted-ziggs.webp" alt="Twisted Ziggs Decklist" class="deck-img">
+                <div class="deck-img-container" onclick="openLightbox(this.querySelector('img'))">
+                    <img src="twisted-ziggs.webp" alt="Ziggs Decklist" class="deck-img">
                 </div>
             </div>
         </div>
 
     </div>
+
+    <!-- Lightbox Modal Overlay -->
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Enlarged Decklist">
+    </div>
+
+    <!-- JavaScript for Lightbox Zoom -->
+    <script>
+        function openLightbox(imgElement) {
+            const modal = document.getElementById('lightbox');
+            const modalImg = document.getElementById('lightbox-img');
+            modal.style.display = 'flex';
+            modalImg.src = imgElement.src;
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox');
+            modal.style.display = 'none';
+        }
+    </script>
 
     <!-- Footer -->
     <footer>
